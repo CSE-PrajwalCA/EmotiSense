@@ -66,14 +66,13 @@ EmotiSense/
 │   ├── helpers.py            
 │   └── test.py                  
 │   └── models/                      
-│         ├── final\_model.keras       
-│         ├── final\_multiinput\_model\_hubert2.keras   
-│         ├── label\_encoder.pkl    
-│         └── label\_encoder12.pkl      
+│         ├── final_model.keras       
+│         ├── final_multiinput_model_hubert2.keras      
+│         └── label_encoder12.pkl      
 │
 ├── ipynb codes/                
-│   ├── face\_emotion.ipynb       
-│   └── speech\_model.ipynb      
+│   ├── face_emotion.ipynb       
+│   └── speech_model.ipynb      
 │
 └── .gitignore                 
 
@@ -157,7 +156,18 @@ Open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your browser
 - Models trained using **FER2013** (facial recognition) and **RAVDESS** (speech emotion recognition).
 - Special thanks to mentors and open-source contributors.
 
+
+
+---
+
+## License
+
+This project is licensed under:
+
+- **MIT License** – Allows free use, modification, and distribution with attribution.  
+- Pretrained model weights (`final_model.keras`, `final_multiinput_model_hubert2.keras`) are for **research and educational use only** and follow the licenses of FER2013 and RAVDESS datasets.  
+- Please ensure compliance with **dataset licenses** when redistributing or deploying commercially.
+
 ---
 ```
 
----
