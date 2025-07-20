@@ -1,4 +1,3 @@
-```markdown
 # EmotiSense: Dual-Modal Emotion Recognition for Autism Support
 
 EmotiSense is a dual-modality emotion recognition system designed to assist individuals with autism, caregivers, and therapists by interpreting emotions from **facial expressions** and **speech tones**. The application leverages deep learning (CNN for face, HuBERT for speech) to analyze uploaded or live-captured data and delivers insights with confidence levels. It is built with a responsive web interface for ease of use in therapy, education, and research.
