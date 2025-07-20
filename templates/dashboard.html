@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Recognition Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Navigation Header -->
+        <header class="nav-header">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <span>Emoti Sense</span>
+                </div>
+                <div class="nav-controls">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Parallax Hero Section -->
+        <section class="hero-section">
+            <div class="parallax-bg"></div>
+            <div class="hero-content">
+                <h1>Real-Time Emotion Recognition</h1>
+                <p>Advanced AI-powered emotion detection for autism support</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">99.2%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Real-Time</span>
+                        <span class="stat-label">Processing</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Emotions</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard -->
+        <main class="main-content">
+            <!-- Control Panel -->
+            <section class="control-panel">
+                <div class="panel-header">
+                    <h2>Control Center</h2>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>System Ready</span>
+                    </div>
+                </div>
+                
+                <div class="control-grid">
+                    <button class="control-btn" id="webcamBtn">
+                        <i class="fas fa-video"></i>
+                        <span>Start Webcam</span>
+                    </button>
+                    <button class="control-btn" id="micBtn">
+                        <i class="fas fa-microphone"></i>
+                        <span>Start Microphone</span>
+                    </button>
+                    <button class="control-btn" id="uploadImageBtn">
+                        <i class="fas fa-image"></i>
+                        <span>Upload Image</span>
+                    </button>
+                    <button class="control-btn" id="uploadAudioBtn">
+                        <i class="fas fa-file-audio"></i>
+                        <span>Upload Audio</span>
+                    </button>
+                </div>
+                
+                <div class="sensitivity-control">
+                    <label for="sensitivitySlider">Detection Sensitivity</label>
+                    <input type="range" id="sensitivitySlider" min="1" max="10" value="5">
+                    <span id="sensitivityValue">5</span>
+                </div>
+            </section>
+
+            <!-- Live Feed Section -->
+            <section class="live-feed-section">
+                <div class="feed-container">
+                    <div class="video-container">
+                        <video id="webcamVideo" autoplay muted></video>
+                        <canvas id="faceCanvas"></canvas>
+                        <div class="video-overlay">
+                            <div class="recording-indicator">
+                                <span class="rec-dot"></span>
+                                <span>LIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="audio-visualizer">
+                        <div class="audio-bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <div class="audio-controls">
+                            <button id="muteBtn"><i class="fas fa-volume-up"></i></button>
+                            <span>Audio Level</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emotion Dashboard -->
+            <section class="emotion-dashboard">
+                <div class="current-emotion">
+                    <div class="emotion-display">
+                        <div class="emotion-emoji" id="currentEmoji">😐</div>
+                        <div class="emotion-info">
+                            <h3 id="emotionName">Neutral</h3>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="confidenceFill"></div>
+                            </div>
+                            <span class="confidence-text" id="confidenceText">85%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="emotion-tips">
+                        <h4>Emotion Insights</h4>
+                        <p id="emotionTip">The person appears calm and neutral.</p>
+                    </div>
+                </div>
+                
+                <div class="emotion-history">
+                    <h4>Recent Emotions</h4>
+                    <div class="history-timeline" id="emotionTimeline">
+                        <!-- Timeline items will be added dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW: Top 3 Emotions Section -->
+            <section class="top-emotions-section">
+                <div class="top-emotions-container">
+                    <h3><i class="fas fa-chart-bar"></i> Top 3 Emotions</h3>
+                    <div class="top-emotions-grid" id="topEmotionsGrid">
+                        <!-- Top 3 emotions will be populated dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW: Autism Support Tips Section -->
+            <section class="autism-tips-section">
+                <div class="autism-tips-container">
+                    <h3><i class="fas fa-heart"></i> Autism Support Tips</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-icon"><i class="fas fa-smile"></i></div>
+                            <h4>Understanding Emotions</h4>
+                            <p>Practice identifying emotions through facial expressions and body language. Use visual aids and emotion cards to help recognize different feelings.</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon"><i class="fas fa-users"></i></div>
+                            <h4>Social Interaction</h4>
+                            <p>Start with small group interactions and gradually increase social exposure. Use structured activities to practice social skills in a comfortable environment.</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon"><i class="fas fa-brain"></i></div>
+                            <h4>Sensory Management</h4>
+                            <p>Create a sensory-friendly environment with appropriate lighting, sounds, and textures. Use sensory tools like fidget toys or weighted blankets when needed.</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon"><i class="fas fa-calendar"></i></div>
+                            <h4>Routine & Structure</h4>
+                            <p>Maintain consistent daily routines and provide clear schedules. Visual schedules and timers can help with transitions and time management.</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon"><i class="fas fa-comments"></i></div>
+                            <h4>Communication</h4>
+                            <p>Use clear, direct language and allow processing time. Visual supports like pictures or symbols can enhance understanding and expression.</p>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                            <h4>Self-Regulation</h4>
+                            <p>Teach coping strategies like deep breathing, counting, or taking breaks. Create a calm-down space where one can retreat when overwhelmed.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Areas -->
+            <section class="upload-section">
+                <div class="upload-grid">
+                    <div class="upload-area" id="imageUploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h3>Upload Image</h3>
+                            <p>Drag & drop or click to select</p>
+                            <input type="file" id="imageInput" accept="image/*" hidden>
+                        </div>
+                        <div class="upload-preview" id="imagePreview"></div>
+                    </div>
+                    
+                    <div class="upload-area" id="audioUploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-music"></i>
+                            <h3>Upload Audio</h3>
+                            <p>Drag & drop or click to select</p>
+                            <input type="file" id="audioInput" accept="audio/*" hidden>
+                        </div>
+                        <div class="upload-preview" id="audioPreview"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- NEW: Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Emoti Sense</h4>
+                    <p>Advanced emotion recognition technology for autism support and understanding.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Real-time emotion detection</li>
+                        <li>Autism support resources</li>
+                        <li>Advanced AI analysis</li>
+                        <li>User-friendly interface</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li>Documentation</li>
+                        <li>Community</li>
+                        <li>Contact Us</li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Developed by <strong>Prajwal C A</strong> & <strong>Pranav V P</strong>. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="modal" id="processingModal">
+        <div class="modal-content">
+            <div class="processing-animation">
+                <div class="neural-network">
+                    <div class="node"></div>
+                    <div class="node"></div>
+                    <div class="node"></div>
+                    <div class="connection"></div>
+                    <div class="connection"></div>
+                </div>
+            </div>
+            <h3>Processing Emotion Data...</h3>
+            <p>AI models are analyzing the input</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<!-- <div id="chatbot-container">
+    <script src="https://cdn.botpress.cloud/webchat/v3.1/shareable.html?configUrl=https://files.bpcontent.cloud/2025/07/19/15/20250719151059-TVKCZOPG.json"></script> -->
+</div>
+</body>
+</html>

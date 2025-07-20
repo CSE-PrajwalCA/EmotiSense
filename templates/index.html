@@ -1,0 +1,60 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detector</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 20px; }
+        input[type="file"] { margin: 20px; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Emotion Detection (Image & Audio)</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageInput">
+        <input type="file" name="audio" id="audioInput">
+        <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('uploadForm').onsubmit = async function (e) {
+            e.preventDefault();
+            const formData = new FormData();
+            const imageFile = document.getElementById('imageInput').files[0];
+            const audioFile = document.getElementById('audioInput').files[0];
+            if (imageFile) formData.append('image', imageFile);
+            if (audioFile) formData.append('audio', audioFile);
+
+            const res = await fetch('/predict', { method: 'POST', body: formData });
+            const data = await res.json();
+            let output = "";
+            if (Array.isArray(data.prediction)) {
+                data.prediction.forEach(p => {
+                    output += `<p>${p[0]}: ${p[1].toFixed(2)}%</p>`;
+                });
+            } else {
+                output = `<h2>${data.prediction[0]}: ${data.prediction[1].toFixed(2)}%</h2>`;
+            }
+            document.getElementById('result').innerHTML = output;
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Recognition - Elite Coders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <script>
+        // Redirect to login page
+        window.location.href = '/login';
+    </script>
+</body>
+</html>
+
